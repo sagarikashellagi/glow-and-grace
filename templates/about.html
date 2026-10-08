@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Our story</span>
+    <h1>About Glow &amp; Grace</h1>
+    <p class="page-hero__lead">
+      Clean, conscious skincare born from a stubborn belief in honesty.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-6" data-animate>
+        <span class="eyebrow">Where it began</span>
+        <h2>One kitchen, one formula, one rule</h2>
+        <p>
+          In 2019 our founder Maya began mixing small batches of vitamin C
+          serum in her London kitchen after failing to find a formula that
+          was both effective and genuinely gentle. Friends asked for bottles.
+          Then their friends did. Glow &amp; Grace was born.
+        </p>
+        <p>
+          We've grown, but the rule hasn't changed: if we wouldn't put it on
+          our own skin, it doesn't go in the bottle. Every formula is built
+          around a small number of clinically proven actives at meaningful
+          concentrations — and nothing else.
+        </p>
+        <a href="{% url 'products:list' %}" class="btn btn-gg mt-2">
+          Shop the collection
+        </a>
+      </div>
+
+      <div class="col-lg-6" data-animate>
+        <div class="about-collage">
+          <div class="about-collage__card about-collage__card--a">
+            <i class="bi bi-flask"></i>
+            <h4>Small-batch</h4>
+            <p>Made in batches of 500 for peak freshness.</p>
+          </div>
+          <div class="about-collage__card about-collage__card--b">
+            <i class="bi bi-heart"></i>
+            <h4>Cruelty-free</h4>
+            <p>Leaping Bunny certified since day one.</p>
+          </div>
+          <div class="about-collage__card about-collage__card--c">
+            <i class="bi bi-globe-europe-africa"></i>
+            <h4>Carbon-neutral</h4>
+            <p>Offset shipping and recyclable packaging.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="section__head" data-animate>
+      <span class="eyebrow">Our standards</span>
+      <h2>What we will never do</h2>
+    </div>
+
+    <div class="why__grid">
+      <div class="why__card" data-animate>
+        <span class="why__num">01</span>
+        <h3>No animal testing</h3>
+        <p>Not by us, not by our suppliers, not anywhere in the chain. Ever.</p>
+      </div>
+      <div class="why__card" data-animate>
+        <span class="why__num">02</span>
+        <h3>No hidden fragrance</h3>
+        <p>When we say fragrance-free, we mean it. Full INCI lists are always public.</p>
+      </div>
+      <div class="why__card" data-animate>
+        <span class="why__num">03</span>
+        <h3>No filler actives</h3>
+        <p>We don't put 0.001% of a hero ingredient on the label to sell a story.</p>
+      </div>
+      <div class="why__card" data-animate>
+        <span class="why__num">04</span>
+        <h3>No greenwashing</h3>
+        <p>Recyclable, refillable and offset — not just "eco-inspired" marketing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head" data-animate>
+      <span class="eyebrow">The team</span>
+      <h2>Small team, big obsession</h2>
+      <p>Formulators, dermatologists and beauty editors who care about the details.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4" data-animate>
+        <div class="team-card">
+          <div class="team-card__avatar" style="--tint: #F3C9A8;">M</div>
+          <h3>Maya Adeyemi</h3>
+          <p class="team-card__role">Founder &amp; Formulator</p>
+          <p>Cosmetic chemist with 12 years in clinical skincare.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-animate>
+        <div class="team-card">
+          <div class="team-card__avatar" style="--tint: #E8B4B8;">D</div>
+          <h3>Dr. Lena Park</h3>
+          <p class="team-card__role">Consultant Dermatologist</p>
+          <p>Reviews every formula for safety and efficacy.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-animate>
+        <div class="team-card">
+          <div class="team-card__avatar" style="--tint: #BFD8D2;">R</div>
+          <h3>Ravi Menon</h3>
+          <p class="team-card__role">Head of Sustainability</p>
+          <p>Keeps us honest on packaging, refills and carbon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

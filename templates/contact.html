@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Get in touch</span>
+    <h1>Contact Glow &amp; Grace</h1>
+    <p class="page-hero__lead">
+      Questions about a product, an order or your routine? We'd love to hear from you.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-5">
+
+      {# --- Contact info column --- #}
+      <div class="col-lg-5" data-animate>
+        <h2>Say hello</h2>
+        <p>
+          Our skincare advisors are real humans (not bots) and reply within
+          one business day.
+        </p>
+
+        <ul class="contact-list">
+          <li>
+            <span class="contact-list__icon"><i class="bi bi-geo-alt"></i></span>
+            <div>
+              <strong>Studio</strong>
+              <p>14 Rosewood Lane, London, EC1 4TR</p>
+            </div>
+          </li>
+          <li>
+            <span class="contact-list__icon"><i class="bi bi-envelope"></i></span>
+            <div>
+              <strong>Email</strong>
+              <p>
+                <a href="mailto:hello@glowandgrace.com">hello@glowandgrace.com</a>
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="contact-list__icon"><i class="bi bi-telephone"></i></span>
+            <div>
+              <strong>Phone</strong>
+              <p><a href="tel:+442071234567">+44 20 7123 4567</a></p>
+            </div>
+          </li>
+          <li>
+            <span class="contact-list__icon"><i class="bi bi-clock"></i></span>
+            <div>
+              <strong>Hours</strong>
+              <p>Mon–Fri, 9am – 6pm GMT</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="contact-social">
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="#" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+      {# --- Form column --- #}
+      <div class="col-lg-7" data-animate>
+        <div class="contact-card" id="contact-form">
+          <h2>Send a message</h2>
+
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+            {# Honeypot — hidden from real users #}
+            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+              {{ form.website }}
+            </div>
+
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+              </div>
+            {% endif %}
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="{{ form.name.id_for_label }}" class="form-label">
+                  Name
+                </label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.name.errors|striptags }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label for="{{ form.email.id_for_label }}" class="form-label">
+                  Email
+                </label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.email.errors|striptags }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label for="{{ form.subject.id_for_label }}" class="form-label">
+                  Subject
+                </label>
+                {{ form.subject }}
+                {% if form.subject.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.subject.errors|striptags }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label for="{{ form.message.id_for_label }}" class="form-label">
+                  Message
+                </label>
+                {{ form.message }}
+                {% if form.message.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.message.errors|striptags }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-gg btn-lg w-100">
+                  <i class="bi bi-send me-2"></i> Send message
+                </button>
+              </div>
+
+              <div class="col-12">
+                <p class="contact-card__fine">
+                  By sending this form you agree to our
+                  <a href="{% url 'products:privacy' %}">privacy policy</a>.
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

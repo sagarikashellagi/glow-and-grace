@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     BREADCRUMB
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="pd">
+  <div class="container">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb gg-crumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'products:home' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'products:list' %}">Shop</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'products:list' %}?category={{ product.category.slug }}">
+            {{ product.category.name }}
+          </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {{ product.name }}
+        </li>
+      </ol>
+    </nav>
+
+    {# --- Top: image + details --- #}
+    <div class="row g-5 align-items-start">
+
+      {# --- Left: media --- #}
+      <div class="col-lg-6" data-animate>
+        <div class="pd__media">
+          {% if product.display_image %}
+            <img src="{{ product.display_image }}"
+                 alt="{{ product.name }} — {{ product.tagline }}"
+                 class="pd__img"
+                 loading="eager">
+          {% else %}
+            <div class="pv" style="--accent: {{ product.accent_color }};">
+              <svg class="pv__svg" viewBox="0 0 400 400"
+                   xmlns="http://www.w3.org/2000/svg"
+                   role="img"
+                   aria-label="{{ product.name }} by Glow &amp; Grace">
+                <defs>
+                  <linearGradient id="bg-pd" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFFBF8"/>
+                    <stop offset="100%" stop-color="{{ product.accent_color }}"/>
+                  </linearGradient>
+                </defs>
+                <rect width="400" height="400" fill="url(#bg-pd)"/>
+                <circle cx="200" cy="196" r="132" fill="#ffffff" opacity="0.30"/>
+                <rect x="172" y="46" width="56" height="30" rx="9" fill="{{ product.accent_color }}"/>
+                <rect x="182" y="74" width="36" height="20" rx="5" fill="#ffffff" opacity="0.75"/>
+                <rect x="134" y="92" width="132" height="240" rx="36"
+                      fill="#ffffff" opacity="0.75"
+                      stroke="#ffffff" stroke-width="2"/>
+                <text x="200" y="216" text-anchor="middle"
+                      font-family="Cormorant Garamond, Georgia, serif"
+                      font-size="26" font-weight="600" fill="#3B2F2F">G&amp;G</text>
+              </svg>
+            </div>
+          {% endif %}
+
+          <div class="pd__badges">
+            {% if product.bestseller %}
+              <span class="badge-pill badge-pill--rose">Bestseller</span>
+            {% endif %}
+            {% if product.discount_percent %}
+              <span class="badge-pill badge-pill--gold">
+                Save {{ product.discount_percent }}%
+              </span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      {# --- Right: details --- #}
+      <div class="col-lg-6" data-animate>
+
+        <span class="product-card__cat">{{ product.category.name }}</span>
+        <h1 class="pd__title">{{ product.name }}</h1>
+
+        {% if product.tagline %}
+          <p class="pd__tagline">{{ product.tagline }}</p>
+        {% endif %}
+
+        <div class="pd__meta">
+          <span class="stars" aria-label="Rated {{ product.rating }} out of 5">
+            <span class="stars__base">★★★★★</span>
+            <span class="stars__fill" style="width: {{ product.star_fill_width }}%">
+              ★★★★★
+            </span>
+          </span>
+          <span class="pd__reviews">
+            {{ product.rating }} · {{ product.reviews_count }} reviews
+          </span>
+        </div>
+
+        <div class="pd__price">
+          <span class="price price--lg">${{ product.price }}</span>
+          {% if product.compare_at_price %}
+            <s>${{ product.compare_at_price }}</s>
+          {% endif %}
+        </div>
+
+        <p class="pd__desc">{{ product.description }}</p>
+
+        <div class="pd__facts">
+          {% if product.size %}
+            <div>
+              <span>Size</span>
+              <strong>{{ product.size }}</strong>
+            </div>
+          {% endif %}
+          <div>
+            <span>Skin type</span>
+            <strong>{{ product.get_skin_type_display }}</strong>
+          </div>
+          <div>
+            <span>Category</span>
+            <strong>{{ product.category.name }}</strong>
+          </div>
+        </div>
+
+        <div class="pd__actions">
+          <a href="{% url 'products:contact' %}" class="btn btn-gg btn-lg">
+            <i class="bi bi-bag-heart me-2"></i> Enquire to buy
+          </a>
+          <a href="{% url 'products:list' %}?category={{ product.category.slug }}"
+             class="btn btn-outline-gg btn-lg">
+            More in {{ product.category.name }}
+          </a>
+        </div>
+
+        <ul class="pd__assurance">
+          <li><i class="bi bi-truck"></i> Free shipping over $60</li>
+          <li><i class="bi bi-arrow-repeat"></i> 30-day returns</li>
+          <li><i class="bi bi-patch-check"></i> Vegan &amp; cruelty-free</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DETAIL PANELS: benefits / ingredients / how to use
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section section--tint">
+  <div class="container">
+    <div class="pd__tabs" data-animate>
+
+      {% if product.benefit_list %}
+        <div class="pd__panel">
+          <h3><i class="bi bi-stars"></i> Key benefits</h3>
+          <ul class="checklist">
+            {% for b in product.benefit_list %}
+              <li>
+                <i class="bi bi-check2-circle"></i>
+                {{ b }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if product.ingredients %}
+        <div class="pd__panel">
+          <h3><i class="bi bi-flask"></i> Ingredients</h3>
+          <p class="pd__ingredients">{{ product.ingredients }}</p>
+          <p class="pd__note">
+            Full INCI list. Always fragrance-free unless stated.
+          </p>
+        </div>
+      {% endif %}
+
+      {% if product.how_to_use %}
+        <div class="pd__panel">
+          <h3><i class="bi bi-droplet-half"></i> How to use</h3>
+          <p>{{ product.how_to_use }}</p>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     RELATED PRODUCTS
+     ═══════════════════════════════════════════════════════════════════════ -->
+{% if related %}
+<section class="section">
+  <div class="container">
+    <div class="section__head" data-animate>
+      <span class="eyebrow">You may also like</span>
+      <h2>Complete the ritual</h2>
+    </div>
+
+    <div class="product-grid">
+      {% for p in related %}
+        {% include "partials/_product_card.html" with product=p %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

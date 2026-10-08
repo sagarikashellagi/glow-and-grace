@@ -1,0 +1,78 @@
+{% load static %}
+<footer class="gg-footer">
+  <div class="container">
+
+    <div class="row g-4 gg-footer__top">
+
+      {# --- Brand column --- #}
+      <div class="col-lg-4 col-md-6">
+        <a class="gg-brand gg-brand--footer" href="{% url 'products:home' %}">
+          <span class="gg-brand__mark">G</span>
+          <span class="gg-brand__text">Glow <em>&amp;</em> Grace</span>
+        </a>
+        <p class="gg-footer__blurb">
+          Clean, conscious skincare for everyday radiance. Formulated in small
+          batches, dermatologist tested, and never tested on animals.
+        </p>
+        <div class="gg-social">
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="#" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+      {# --- Shop column (dynamic categories) --- #}
+      <div class="col-lg-2 col-md-6 col-6">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="{% url 'products:list' %}">All products</a></li>
+          {% for cat in nav_categories|slice:":5" %}
+            <li>
+              <a href="{% url 'products:list' %}?category={{ cat.slug }}">
+                {{ cat.name }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {# --- Company column --- #}
+      <div class="col-lg-2 col-md-6 col-6">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="{% url 'products:about' %}">About us</a></li>
+          <li><a href="{% url 'products:faq' %}">FAQ</a></li>
+          <li><a href="{% url 'products:contact' %}">Contact</a></li>
+          <li><a href="{% url 'products:privacy' %}">Privacy policy</a></li>
+          <li><a href="{% url 'products:terms' %}">Terms &amp; conditions</a></li>
+        </ul>
+      </div>
+
+      {# --- Contact column --- #}
+      <div class="col-lg-4 col-md-6">
+        <h4>Get in touch</h4>
+        <ul class="gg-footer__contact">
+          <li><i class="bi bi-geo-alt"></i> 14 Rosewood Lane, London, EC1 4TR</li>
+          <li>
+            <i class="bi bi-envelope"></i>
+            <a href="mailto:hello@glowandgrace.com">hello@glowandgrace.com</a>
+          </li>
+          <li>
+            <i class="bi bi-telephone"></i>
+            <a href="tel:+442071234567">+44 20 7123 4567</a>
+          </li>
+          <li><i class="bi bi-clock"></i> Mon–Fri, 9am – 6pm GMT</li>
+        </ul>
+      </div>
+
+    </div>
+
+    {# --- Bottom bar --- #}
+    <div class="gg-footer__bottom">
+      <p>&copy; {% now "Y" %} Glow &amp; Grace. All rights reserved.</p>
+      <p class="gg-footer__mini">Made with care · Cruelty-free · Vegan</p>
+    </div>
+
+  </div>
+</footer>

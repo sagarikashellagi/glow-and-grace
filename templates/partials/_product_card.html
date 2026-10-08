@@ -1,0 +1,64 @@
+{# Reusable product card. Expects a `product` context variable. #}
+<article class="product-card" data-animate>
+  <a class="product-card__media"
+     href="{{ product.get_absolute_url }}"
+     aria-label="{{ product.name }}">
+
+    {% if product.display_image %}
+      <img src="{{ product.display_image }}"
+           alt="{{ product.name }} — {{ product.tagline }}"
+           loading="lazy">
+    {% else %}
+      <div class="pv" style="--accent: {{ product.accent_color }};"></div>
+    {% endif %}
+
+    <div class="product-card__badges">
+      {% if product.bestseller %}
+        <span class="badge-pill badge-pill--rose">Bestseller</span>
+      {% endif %}
+      {% if product.discount_percent %}
+        <span class="badge-pill badge-pill--gold">
+          -{{ product.discount_percent }}%
+        </span>
+      {% endif %}
+    </div>
+
+    <span class="product-card__quick">View details</span>
+  </a>
+
+  <div class="product-card__body">
+    <span class="product-card__cat">{{ product.category.name }}</span>
+
+    <h3 class="product-card__title">
+      <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+    </h3>
+
+    {% if product.tagline %}
+      <p class="product-card__tag">{{ product.tagline }}</p>
+    {% endif %}
+
+    <div class="product-card__meta">
+      <span class="stars" aria-label="Rated {{ product.rating }} out of 5">
+        <span class="stars__base">★★★★★</span>
+        <span class="stars__fill" style="width: {{ product.star_fill_width }}%">
+          ★★★★★
+        </span>
+      </span>
+      <span class="product-card__reviews">
+        {{ product.reviews_count }} reviews
+      </span>
+    </div>
+
+    <div class="product-card__foot">
+      <span class="price">
+        ${{ product.price }}
+        {% if product.compare_at_price %}
+          <s>${{ product.compare_at_price }}</s>
+        {% endif %}
+      </span>
+      <a href="{{ product.get_absolute_url }}" class="btn btn-ghost btn-sm">
+        Details
+      </a>
+    </div>
+  </div>
+</article>

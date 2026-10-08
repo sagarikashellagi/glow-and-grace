@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Support</span>
+    <h1>Frequently asked questions</h1>
+    <p class="page-hero__lead">
+      Everything you wanted to know about our formulas, shipping and returns.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="faq">
+      <div class="accordion" id="faqAccordion">
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#faq1"
+                    aria-expanded="true" aria-controls="faq1">
+              Are your products suitable for sensitive skin?
+            </button>
+          </h2>
+          <div id="faq1" class="accordion-collapse collapse show"
+               data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes. Every formula is dermatologist tested and free from
+              parabens, sulphates, phthalates and drying alcohols. Our
+              Gentle Cream Cleanser and Hyaluronic Acid Serum are
+              specifically formulated for reactive and rosacea-prone skin.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#faq2"
+                    aria-expanded="false" aria-controls="faq2">
+              Are you cruelty-free and vegan?
+            </button>
+          </h2>
+          <div id="faq2" class="accordion-collapse collapse"
+               data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Always. We are Leaping Bunny certified and 100% vegan. No
+              ingredient, in any product, has ever been tested on animals —
+              by us or by any of our suppliers.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#faq3"
+                    aria-expanded="false" aria-controls="faq3">
+              Can I use Vitamin C Serum with retinol?
+            </button>
+          </h2>
+          <div id="faq3" class="accordion-collapse collapse"
+               data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes — but at different times of day. Use Vitamin C in the
+              morning (it boosts your sunscreen) and retinol at night. If
+              your skin is sensitive, alternate nights instead.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#faq4"
+                    aria-expanded="false" aria-controls="faq4">
+              How long until I see results?
+            </button>
+          </h2>
+          <div id="faq4" class="accordion-collapse collapse"
+               data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Hydration is immediate. Brightening and dark-spot fading
+              typically becomes visible after 4–8 weeks of consistent
+              daily use. Barrier repair usually takes around 2 weeks.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#faq5"
+                    aria-expanded="false" aria-controls="faq5">
+              Do you ship internationally?
+            </button>
+          </h2>
+          <div id="faq5" class="accordion-collapse collapse"
+               data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              We ship to over 40 countries. UK &amp; EU delivery is 2–4
+              working days, US &amp; Canada 4–7, rest of world 7–14.
+              Free shipping over $60.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#faq6"
+                    aria-expanded="false" aria-controls="faq6">
+              What is your returns policy?
+            </button>
+          </h2>
+          <div id="faq6" class="accordion-collapse collapse"
+               data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              If a product doesn't work for you, return it within 30 days
+              — even if opened — for a full refund. Email
+              hello@glowandgrace.com and we'll send a prepaid label.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#faq7"
+                    aria-expanded="false" aria-controls="faq7">
+              Are your products pregnancy-safe?
+            </button>
+          </h2>
+          <div id="faq7" class="accordion-collapse collapse"
+               data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Most are. We avoid retinol in all our formulas and use
+              bakuchiol instead (in the Overnight Repair Mask). Always
+              check with your doctor first.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#faq8"
+                    aria-expanded="false" aria-controls="faq8">
+              How do I build a routine?
+            </button>
+          </h2>
+          <div id="faq8" class="accordion-collapse collapse"
+               data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Keep it simple: cleanser → treatment serum → moisturiser → SPF
+              in the morning. At night: cleanser → treatment → oil or cream.
+              Start with one active at a time and add the next after 2 weeks.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="container">
+    <div class="newsletter__inner" data-animate>
+      <div class="newsletter__copy">
+        <span class="eyebrow eyebrow--light">Still have questions?</span>
+        <h2>We're here to help</h2>
+        <p>Our skincare advisors reply within one business day.</p>
+      </div>
+      <a href="{% url 'products:contact' %}" class="btn btn-gg btn-lg">
+        Contact us
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

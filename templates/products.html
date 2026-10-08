@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     PAGE HERO
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="page-hero page-hero--sm">
+  <div class="container">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb gg-crumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'products:home' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'products:list' %}">Shop</a>
+        </li>
+        {% if current_category %}
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ current_category.name }}
+          </li>
+        {% elif query %}
+          <li class="breadcrumb-item active" aria-current="page">
+            Search
+          </li>
+        {% endif %}
+      </ol>
+    </nav>
+
+    <h1>
+      {% if current_category %}
+        {{ current_category.name }}
+      {% elif query %}
+        Results for "{{ query }}"
+      {% else %}
+        Shop all products
+      {% endif %}
+    </h1>
+
+    <p class="page-hero__lead">
+      {% if current_category and current_category.description %}
+        {{ current_category.description }}
+      {% elif query %}
+        {{ products|length }} product{{ products|length|pluralize }} matching your search.
+      {% else %}
+        12 hero formulas. Clinically dosed. Cruelty-free.
+      {% endif %}
+    </p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     TOOLBAR + GRID
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+
+    {# --- Toolbar: chips + sort --- #}
+    <div class="shop-toolbar" data-animate>
+
+      <div class="shop-toolbar__filters">
+        <a href="{% url 'products:list' %}"
+           class="chip {% if not current_category and not query %}chip--active{% endif %}">
+          All
+        </a>
+        {% for cat in categories %}
+          <a href="{% url 'products:list' %}?category={{ cat.slug }}"
+             class="chip {% if current_category and current_category.slug == cat.slug %}chip--active{% endif %}">
+            {{ cat.name }}
+          </a>
+        {% endfor %}
+      </div>
+
+      <form class="shop-toolbar__sort" method="get" action="{% url 'products:list' %}">
+        {% if query %}
+          <input type="hidden" name="q" value="{{ query }}">
+        {% endif %}
+        {% if current_category %}
+          <input type="hidden" name="category" value="{{ current_category.slug }}">
+        {% endif %}
+        <label for="sort" class="visually-hidden">Sort by</label>
+        <select id="sort" name="sort"
+                class="form-select"
+                onchange="this.form.submit()">
+          <option value="" {% if not sort %}selected{% endif %}>
+            Sort: Featured
+          </option>
+          <option value="price-asc" {% if sort == 'price-asc' %}selected{% endif %}>
+            Price: Low to High
+          </option>
+          <option value="price-desc" {% if sort == 'price-desc' %}selected{% endif %}>
+            Price: High to Low
+          </option>
+          <option value="rating" {% if sort == 'rating' %}selected{% endif %}>
+            Top rated
+          </option>
+          <option value="newest" {% if sort == 'newest' %}selected{% endif %}>
+            Newest first
+          </option>
+        </select>
+      </form>
+
+    </div>
+
+    {# --- Result count --- #}
+    <p class="shop-count">
+      {{ products|length }} product{{ products|length|pluralize }}
+      {% if current_category %}
+        in {{ current_category.name }}
+      {% endif %}
+      {% if query %}
+        for "{{ query }}"
+      {% endif %}
+    </p>
+
+    {# --- Product grid (or empty state) --- #}
+    {% if products %}
+      <div class="product-grid">
+        {% for product in products %}
+          {% include "partials/_product_card.html" with product=product %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state" data-animate>
+        <i class="bi bi-search"></i>
+        <h2>No products found</h2>
+        <p>Try a different search term or browse the full collection.</p>
+        <a href="{% url 'products:list' %}" class="btn btn-gg">
+          Reset filters
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}

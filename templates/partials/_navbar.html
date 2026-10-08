@@ -1,0 +1,86 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg gg-navbar fixed-top">
+  <div class="container">
+
+    {# --- Brand --- #}
+    <a class="navbar-brand gg-brand" href="{% url 'products:home' %}">
+      <span class="gg-brand__mark">G</span>
+      <span class="gg-brand__text">Glow <em>&amp;</em> Grace</span>
+    </a>
+
+    {# --- Mobile burger --- #}
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#ggNav"
+            aria-controls="ggNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="gg-burger"><span></span><span></span><span></span></span>
+    </button>
+
+    {# --- Collapsible menu --- #}
+    <div class="collapse navbar-collapse" id="ggNav">
+
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+             href="{% url 'products:home' %}">Home</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'list' or request.resolver_match.url_name == 'detail' %}active{% endif %}"
+             href="{% url 'products:list' %}"
+             role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Shop
+          </a>
+          <ul class="dropdown-menu gg-dropdown">
+            <li>
+              <a class="dropdown-item" href="{% url 'products:list' %}">
+                All Products
+              </a>
+            </li>
+            {% if nav_categories %}
+              <li><hr class="dropdown-divider"></li>
+              {% for cat in nav_categories %}
+                <li>
+                  <a class="dropdown-item"
+                     href="{% url 'products:list' %}?category={{ cat.slug }}">
+                    {{ cat.name }}
+                  </a>
+                </li>
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+             href="{% url 'products:about' %}">About</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'faq' %}active{% endif %}"
+             href="{% url 'products:faq' %}">FAQ</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+             href="{% url 'products:contact' %}">Contact</a>
+        </li>
+      </ul>
+
+      {# --- Search --- #}
+      <form class="gg-search d-flex" action="{% url 'products:list' %}" method="get" role="search">
+        <i class="bi bi-search"></i>
+        <input type="search"
+               name="q"
+               placeholder="Search products…"
+               aria-label="Search products"
+               value="{{ query|default:'' }}">
+      </form>
+
+      {# --- CTA --- #}
+      <a href="{% url 'products:list' %}" class="btn btn-gg ms-lg-3">
+        <i class="bi bi-bag-heart me-1"></i> Shop Now
+      </a>
+    </div>
+  </div>
+</nav>
